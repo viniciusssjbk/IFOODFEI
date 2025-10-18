@@ -217,7 +217,7 @@ def buscar_comida():
                         estrela_vazia+=1
 
                     else:
-                        estrela +="⯨ "
+                        estrela +="⯪ "
                         estrela_vazia+=1
 
                 else:
@@ -254,7 +254,7 @@ def buscar_comida():
                         estrela_vazia+=1
 
                     else:
-                        estrela +="⯨ "
+                        estrela +="⯪ "
                         estrela_vazia+=1
 
                 else:
@@ -287,7 +287,7 @@ def buscar_comida():
                         estrela_vazia+=1
 
                     else:
-                        estrela +="⯨ "
+                        estrela +="⯪ "
                         estrela_vazia+=1
 
                 else:
@@ -325,7 +325,7 @@ def buscar_comida():
                                 estrela_vazia+=1
 
                             else:
-                                estrela +="⯨ "
+                                estrela +="⯪ "
                                 estrela_vazia+=1
 
                         else:
@@ -363,7 +363,7 @@ def buscar_comida():
                                 estrela_vazia+=1
 
                             else:
-                                estrela +="⯨ "
+                                estrela +="⯪ "
                                 estrela_vazia+=1
 
                         else:
@@ -399,7 +399,7 @@ def buscar_comida():
                                 estrela_vazia+=1
 
                             else:
-                                estrela +="⯨ "
+                                estrela +="⯪ "
                                 estrela_vazia+=1
 
                         else:
