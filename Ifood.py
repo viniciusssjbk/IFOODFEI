@@ -1,32 +1,183 @@
+
 #Variaveis globais para serem acessadas pelas funções
 #lista que iriar receber o metodo de entrada[email e senha]
 listaentrar = [["vini","123"]]
 #lista que contem todas as informações do usuario(os usuarios seram separados por listas(nome,cep,cpf,email e senha))
 listausuario = [["vinicius","12345-123","123.456.789-9", "vini", "123"]]
 #lista das comidas salgadas
-comidasS = ["Coxinha","Batata fritas", "Torta de frango"]
+comidasS = ["Empada", "Kibe", "Esfiha", "Enroladinho", "Pão de queijo", "Pastel de carne", "Croquete", "Mini pizza", "Bolinha de queijo", "Risole", "Mini hot dog", "Mini hambúrguer"]
 #lista dos doces
-comidasD = ["Bolo","Brigadeiro", "Doce de leite", "Rosquinha recheada"]
+comidasD = ["Beijinho", "Pudim", "Quindim", "Torta de limão", "Bomba de chocolate", "Brownie", "Cupcake", "Churros", "Mousse de maracujá", "Sorvete", "Pavê", "Trufa"]
 #lista das carnes
-comidasC = ["Bisteca","Bife"]
+comidasC = ["Frango grelhado", "Carne de panela", "Costela", "Picanha", "Alcatra", "Filé mignon", "Coxa de frango", "Linguiça", "Carne moída", "Lombo", "Cupim", "Carne seca"]
 #lista dos lanches, os lanches sao separados pelo primeiro alimento e os demais sao os sabores do alimento
-comidasL = [["Pizza","Portuguesa","Peperoni","Frango com catupiry","Queijo"], ["Hamburguer","X-TUDO","X-BACON","X-SALADA"], ["Pastel","Carne","Calabresa","Frango","Bauru"]]
+comidasL = [["Pizza","Marguerita", "4 queijos", "Calabresa", "Napolitana", "Frango", "Brócolis com bacon", "Carne seca", "Bacon", "Milho com catupiry", "Vegetariana"], 
+            ["Hamburguer","X-FRANGO", "X-EGG", "X-TUDO DUPLO", "X-FISH", "X-SPECIAL", "X-FRANGO COM BACON", "X-CALABRESA", "X-SALAME", "X-CHEDDAR", "X-VEGANO"],
+            ["Pastel","Queijo", "Pizza", "Chocolate", "Palmito", "Brócolis", "Carne seca", "Milho", "Presunto", "Catupiry", "Banana com canela"],
+            ["Hot Dog", "Tradicional", "Duplo", "Bacon", "Frango com catupiry", "Calabresa","Americano", "Vegetariano", "Apimentado", "Catupiry", "Cheddar"],
+            ["Tapioca", "Frango", "Carne seca", "Queijo", "Presunto e queijo","Coco com leite condensado", "Banana com canela", "Chocolate", "Romeu e Julieta"],
+            ["Sanduíche", "Natural", "Atum", "Frango", "Salame", "Queijo e presunto", "Vegano", "Peito de peru", "Ovo e queijo", "Bacon"]]
 #quantidade geral de categoria de comidas
 comidastipo = 4
 #preço de cada salgado conforme a ordem da lista
-preco_S = [6,8,12.5]
+preco_S = [6, 8, 12.5 ,7, 6, 6, 6, 5, 8, 6, 9, 5, 6, 5, 7, 7, 8]
 #preço de cada doce conforme a ordem da lista
-preco_D = [12,8,7,6.5]
+preco_D = [12, 8, 7, 6.5, 5, 6, 7, 8, 9, 10, 7, 8, 6, 5, 8, 7]
 #preço de cada carne conforme a ordem da lista
-preco_C = [30, 29]
+preco_C = [30, 29,25, 28, 35, 45, 38, 50, 25, 22, 30, 33, 40, 37, 42]
 #preço de cada sabor de pizza conforme a ordem da lista
-preco_LPiz = [30,30,32,29]
-#preço de cada sabor de hamburguer conforme a ordem da lista
-preco_LHam = [20,22,25]
-#preço de cada sabor de pastel conforme a ordem da lista
-preco_LPas = [12,15,12,12]
+preco_LHot = [10, 12, 14, 15, 13, 16, 12, 14, 13, 15]   # Hot Dog
+preco_LTapi = [10, 12, 12, 11, 10, 13, 13, 14, 14]      # Tapioca
+preco_LSand = [9, 10, 11, 12, 11, 13, 12, 12, 14]       # Sanduíche
+preco_LPiz = [30, 30, 32, 29] + [28, 29, 30, 30, 29, 28, 31, 32, 29, 28, 27]
+preco_LHam = [20, 22, 25] + [18, 19, 30, 27, 29, 35, 30, 28, 27, 29, 33, 25]
+preco_LPas = [12, 15, 12, 12] + [10, 11, 10, 12, 13, 12, 15, 10, 10, 10, 11]
+
 #lista de todas as avaliação,elas sao separas primeiro por categoria conforme a ordem das listas, segundo pelo numero do alimento conforme a ordem da lista, terceiro no caso dos lanches os sabores conforme a ordem da lista
-avaliacao = [[[3,2],[1,2],[2]],[[5],[3.5],[2],[2,1]],[[1],[2]],[[[1.5,4],[2],[2,4],[2]],[[2],[1],[5]],[[2],[1],[3],[2]]]]
+avaliacao_S = [
+    [3, 2],
+    [1, 2],
+    [2],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3]
+]
+
+avaliacao_D = [
+    [5],
+    [3.5],
+    [2],
+    [2, 1],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3]
+]
+
+avaliacao_C = [
+    [1],
+    [2],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3]
+]
+
+avaliacao_LPiz = [
+    [1.5, 4],
+    [2],
+    [2, 4],
+    [2],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3]
+]
+
+avaliacao_LHam = [
+    [2],
+    [1],
+    [5],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3]
+]
+
+avaliacao_LPas = [
+    [2],
+    [1],
+    [3],
+    [2],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3]
+]
+
+avaliacao_LHot = [
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3]
+]
+
+avaliacao_LTapi = [
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3]
+]
+
+avaliacao_LSand = [
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3],
+    [3]
+]
+avaliacao=[avaliacao_S,avaliacao_D,avaliacao_C,[avaliacao_LPiz,avaliacao_LHam,avaliacao_LPas,avaliacao_LHot,avaliacao_LTapi,avaliacao_LSand]]
 #função menu onde sera a primeira a iniciar
 def menu():
     #chama a função logo para gerar um desenho
@@ -35,7 +186,6 @@ def menu():
     login = escolha_usuario1()
     #aqui sera chamada a ação do usuario para interagir com o programa e a variavel sera usada para que ela seja passada pelo programa para que seja armazenada para que possa usar depois para recuperar dados do usuario
     escolha_usuario2(login) 
-
 #aqui é a função logo
 def logo():
     #looping para gerar uma logo
@@ -140,12 +290,12 @@ def listar_comida():
         if total[i]>=maior:
             maior = total[i]
     #aqui os nomes das categorias
-    print("|  Nº |     %-15s|     %-15s|     %-15s|     %-15s|"%("SALGADOS","DOCES","CARNES","LANCHES"))
+    print("|  %-3s|     %-15s|     %-15s|     %-15s|     %-15s|"%("Nº","SALGADOS","DOCES","CARNES","LANCHES"))
     #primeiro o loop vai gerar os numeros
     for i in range(maior):
 
 
-        print(f"|  {contar}  |", end="")
+        print("|  %-3s|"%(contar), end="")
         #depois ira verificar se no caso na linha tem alimento na lista caso tenha ele colocara o nome caso nao escreverá xxxxx
         for j in range(comidastipo):
 
@@ -415,18 +565,123 @@ def buscar_comida():
                     print("--------------------------")
                 break
 
+            elif digitar ==4:
+                print("Comida: %d | %-9s| "%(digitar,comidasL[digitar-1][0]))
+
+
+                for i in range(len(comidasL[3])-1):
+                    print("Sabor: %-13s | "% comidasL[digitar-1][i+1])
+                    print("Preço: R$%-10.2f  |"% preco_LPas[i])
+ 
+                    estrela =""
+                    estrela_vazia=0
+                    for k in range (len(avaliacao[3][3][i])):
+                        print("Avaliação: ", end="")
+                        if avaliacao[3][3][i][k]%1!=0:
+
+                            for j in range(int(avaliacao[3][3][i][k])):
+                                estrela +="★ "
+                                estrela_vazia+=1
+
+                            else:
+                                estrela +="⯪ "
+                                estrela_vazia+=1
+
+                        else:
+
+                            for k in range(int(avaliacao[3][3][i][k])):
+                                estrela +="★ "
+                                estrela_vazia+=1
+                        for m in range(5-estrela_vazia):
+                            estrela += "☆ "            
+                        print("%-10s|"%(estrela))
+                        estrela = ""
+                        estrela_vazia=0
+                    print("--------------------------")
+                break
+            elif digitar ==5:
+                print("Comida: %d | %-9s| "%(digitar,comidasL[digitar-1][0]))
+
+
+                for i in range(len(comidasL[4])-1):
+                    print("Sabor: %-13s | "% comidasL[digitar-1][i+1])
+                    print("Preço: R$%-10.2f  |"% preco_LPas[i])
+ 
+                    estrela =""
+                    estrela_vazia=0
+                    for k in range (len(avaliacao[3][4][i])):
+                        print("Avaliação: ", end="")
+                        if avaliacao[3][4][i][k]%1!=0:
+
+                            for j in range(int(avaliacao[3][4][i][k])):
+                                estrela +="★ "
+                                estrela_vazia+=1
+
+                            else:
+                                estrela +="⯪ "
+                                estrela_vazia+=1
+
+                        else:
+
+                            for k in range(int(avaliacao[3][4][i][k])):
+                                estrela +="★ "
+                                estrela_vazia+=1
+                        for m in range(5-estrela_vazia):
+                            estrela += "☆ "            
+                        print("%-10s|"%(estrela))
+                        estrela = ""
+                        estrela_vazia=0
+                    print("--------------------------")
+                break
+            elif digitar ==6:
+                print("Comida: %d | %-9s| "%(digitar,comidasL[digitar-1][0]))
+
+
+                for i in range(len(comidasL[5])-1):
+                    print("Sabor: %-13s | "% comidasL[digitar-1][i+1])
+                    print("Preço: R$%-10.2f  |"% preco_LPas[i])
+ 
+                    estrela =""
+                    estrela_vazia=0
+                    for k in range (len(avaliacao[3][5][i])):
+                        print("Avaliação: ", end="")
+                        if avaliacao[3][5][i][k]%1!=0:
+
+                            for j in range(int(avaliacao[3][5][i][k])):
+                                estrela +="★ "
+                                estrela_vazia+=1
+
+                            else:
+                                estrela +="⯪ "
+                                estrela_vazia+=1
+
+                        else:
+
+                            for k in range(int(avaliacao[3][5][i][k])):
+                                estrela +="★ "
+                                estrela_vazia+=1
+                        for m in range(5-estrela_vazia):
+                            estrela += "☆ "            
+                        print("%-10s|"%(estrela))
+                        estrela = ""
+                        estrela_vazia=0
+                    print("--------------------------")
+                break
 
         else:
             print("%s"%("Nao foi possivel achar uma comida com esse numero!!!"))
 
 #aqui onde o usuario ira escolher seu pedido e podera escolher em editar, acidionar,finalizar ou excluir
 def pedido(num_login):
+    #ira mostrar a lista das comidas novamente
+    listar_comida()
     #aqui ira receber todos os pedidos do usuario
     totalpedido =[]
     #aqui ira receber o pedido
     totalpedido.append(func_pedir())
     while True:
-        digitar = int(input("\n%s\n%s\n%s\n%s\n%s\n%s\n"%("|-------------------------------------|","|Digite 1 para ver adicionar pedido   |","|Digite 2 para editar pedido          |","|Digite 3 para finalizar pedido       |","|Digite 4 para excluir pedido         |","|-------------------------------------|")))
+        listar_comida()
+        digitar = int(input("\n%s\n%s\n%s\n%s\n%s\n%s\n"%("|-------------------------------------|","|Digite 1 para adicionar pedido       |","|Digite 2 para editar pedido          |","|Digite 3 para finalizar pedido       |","|Digite 4 para excluir pedido         |","|-------------------------------------|")))
         if digitar ==1:
             #chama a função para acrescentar na lista total do pedido do usuario
             totalpedido.append(func_pedir())
@@ -601,7 +856,18 @@ def boleto(total,num_login):
                     for n in range(len(comidasL[2])):
                         if total[i][2] == comidasL[2][n].lower():
                             precototal += (preco_LPas[n-1]*total[i][1]) 
-
+                elif total[i][4] == 3: 
+                    for n in range(len(comidasL[3])):
+                        if total[i][2] == comidasL[2][n].lower():
+                            precototal += (preco_LHot[n-1]*total[i][1]) 
+                elif total[i][4] == 4: 
+                    for n in range(len(comidasL[4])):
+                        if total[i][2] == comidasL[2][n].lower():
+                            precototal += (preco_LTapi[n-1]*total[i][1]) 
+                elif total[i][4] == 5: 
+                    for n in range(len(comidasL[5])):
+                        if total[i][2] == comidasL[2][n].lower():
+                            precototal += (preco_LSand[n-1]*total[i][1]) 
     #mostrara o preço total
     print("O preço total é de: R$ %.2f"% precototal) 
     print("--------------------------------------------------------")      
@@ -617,7 +883,7 @@ def feedback(total):
         print("--------------------------")
         while True:
             #o usuario pode avaliar o alimento entre 1 e 5
-            digito = float(input("%s"%("Digite entre 1 e 5 para esse alimento:\n")))
+            digito = float(input("%s"%("Digite entre 0 e 5 para esse alimento:\n")))
             if digito >=0 and digito <=5:
                 break
         print()
@@ -646,6 +912,21 @@ def feedback(total):
                 for n in range(len(comidasL[2])):
                     if total[i][2] == comidasL[2][n].lower():
                         avaliacao[3][2][n-1].append(digito)  
+            elif total[i][4] == 3: 
+                for n in range(len(comidasL[3])):
+                    if total[i][2] == comidasL[3][n].lower():
+                        avaliacao[3][3][n-1].append(digito)
+            elif total[i][4] == 4: 
+                for n in range(len(comidasL[4])):
+                    if total[i][2] == comidasL[4][n].lower():
+                        avaliacao[3][4][n-1].append(digito)
+            elif total[i][4] == 5: 
+                for n in range(len(comidasL[5])):
+                    if total[i][2] == comidasL[5][n].lower():
+                        avaliacao[3][5][n-1].append(digito)  
+              
+              
+            
 
 #aqui chamara a função menu
 menu()
