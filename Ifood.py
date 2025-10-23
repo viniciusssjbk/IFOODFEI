@@ -15,23 +15,30 @@ comidasL = [["Pizza","Marguerita", "4 queijos", "Calabresa", "Napolitana", "Fran
             ["Hamburguer","X-FRANGO", "X-EGG", "X-TUDO DUPLO", "X-FISH", "X-SPECIAL", "X-FRANGO COM BACON", "X-CALABRESA", "X-SALAME", "X-CHEDDAR", "X-VEGANO"],
             ["Pastel","Queijo", "Pizza", "Chocolate", "Palmito", "Brócolis", "Carne seca", "Milho", "Presunto", "Catupiry", "Banana com canela"],
             ["Hot Dog", "Tradicional", "Duplo", "Bacon", "Frango com catupiry", "Calabresa","Americano", "Vegetariano", "Apimentado", "Catupiry", "Cheddar"],
-            ["Tapioca", "Frango", "Carne seca", "Queijo", "Presunto e queijo","Coco com leite condensado", "Banana com canela", "Chocolate", "Romeu e Julieta"],
+            ["Tapioca", "Frango", "Carne seca", "Queijo", "Presunto e queijo","Coco com leite condensado", "Banana com canela", "Chocolate", "Romeu e Julieta","Coco ralado"],
             ["Sanduíche", "Natural", "Atum", "Frango", "Salame", "Queijo e presunto", "Vegano", "Peito de peru", "Ovo e queijo", "Bacon"]]
 #quantidade geral de categoria de comidas
 comidastipo = 4
+sabores_total = 10
 #preço de cada salgado conforme a ordem da lista
-preco_S = [6, 8, 12.5 ,7, 6, 6, 6, 5, 8, 6, 9, 5, 6, 5, 7, 7, 8]
+preco_S = [6, 8, 12.5 ,7, 6, 6, 6, 5, 8, 6, 9, 5]
 #preço de cada doce conforme a ordem da lista
-preco_D = [12, 8, 7, 6.5, 5, 6, 7, 8, 9, 10, 7, 8, 6, 5, 8, 7]
+preco_D = [12, 8, 7, 6.5, 5, 6, 7, 8, 9, 10, 7, 8]
 #preço de cada carne conforme a ordem da lista
-preco_C = [30, 29,25, 28, 35, 45, 38, 50, 25, 22, 30, 33, 40, 37, 42]
+preco_C = [30, 29,25, 28, 35, 45, 38, 50, 25, 22, 30, 33]
 #preço de cada sabor de pizza conforme a ordem da lista
-preco_LHot = [10, 12, 14, 15, 13, 16, 12, 14, 13, 15]   # Hot Dog
-preco_LTapi = [10, 12, 12, 11, 10, 13, 13, 14, 14]      # Tapioca
-preco_LSand = [9, 10, 11, 12, 11, 13, 12, 12, 14]       # Sanduíche
-preco_LPiz = [30, 30, 32, 29] + [28, 29, 30, 30, 29, 28, 31, 32, 29, 28, 27]
-preco_LHam = [20, 22, 25] + [18, 19, 30, 27, 29, 35, 30, 28, 27, 29, 33, 25]
-preco_LPas = [12, 15, 12, 12] + [10, 11, 10, 12, 13, 12, 15, 10, 10, 10, 11]
+preco_LHot = [10, 12, 14, 15, 13, 16, 10, 12, 14, 15]
+
+preco_LTapi = [10, 12, 12, 11, 10, 12, 12, 11, 10, 10]
+
+preco_LSand = [9, 10, 11, 12, 11, 13, 9, 10, 11, 12]
+
+preco_LPiz = [30, 30, 32, 29, 28, 29, 29, 29, 28, 29]
+
+preco_LHam = [20, 22, 25, 18, 19, 30, 20, 22, 25, 18]
+
+preco_LPas = [12, 15, 12, 12, 10, 11, 12, 15, 12, 12]
+
 
 #lista de todas as avaliação,elas sao separas primeiro por categoria conforme a ordem das listas, segundo pelo numero do alimento conforme a ordem da lista, terceiro no caso dos lanches os sabores conforme a ordem da lista
 avaliacao_S = [
@@ -46,10 +53,6 @@ avaliacao_S = [
     [3],
     [3],
     [3],
-    [3],
-    [3],
-    [3],
-    [3]
 ]
 
 avaliacao_D = [
@@ -219,15 +222,18 @@ def escolha_usuario1():
                 return verificar[1]
             else: 
                 print("%s"%("Login errado!!! tente novamente"))
+        else:
+            print("Digite o numero corretamente")
 #aqui a função onde o usuario podera escolher entre ver os alimentos ou cadastrar um pedido
 def escolha_usuario2(num_entrar):
     
     while True:
-        digito = input("\n%s\n%s\n%s\n" % ("|-------------------------------------|","|Digite 1 para ver todas as comidas   |\n|Digite 2 para buscar                 |\n|Digite 3 para cadastrar o seu pedido |","|-------------------------------------|"))
+        digito = input("\n%s\n%s\n%s\n%s\n" % ("|--------------------------------------|","|Digite 1 para ver todas as comidas    |\n|Digite 2 para buscar e mostrar valores|\n|Digite 3 para cadastrar o seu pedido  |","|Digite 4 para sair do programa        |","|--------------------------------------|"))
         if digito == "1":
             #Aqui chamara uma função que ira listar todas as comidas
             listar_comida()
             x = input("%s"%("Precione 'Enter' para continuar..."))
+            sabores()
         elif digito == "2":
             #Aqui chamara a função que buscará uma comida especifica
             buscar_comida()
@@ -235,14 +241,51 @@ def escolha_usuario2(num_entrar):
         elif digito == "3":
             #aqui o num_entrar esta passando o numero do usuario dele na lista de usuario global para que ele seja utilizado depois
             pedido(num_entrar)
-            x = input("%s"%("Precione 'Enter' para continuar..."))          
+            x = input("%s"%("Precione 'Enter' para continuar..."))
+        elif digito == "4":
+            #aqui o num_entrar esta passando o numero do usuario dele na lista de usuario global para que ele seja utilizado depois
+            x = input("%s"%("Saindo do programa....."))
+            break 
+        else:
+            print("Digite o numero corretamente")         
 #Aqui ira cadastrar o usuario
 def cadastrar():
     vetor= []
     vetor.append(input("%s" %("Digite seu nome:\n")))
-    vetor.append(input("%s" %("Digite seu CEP:(XXXXX-XXX)\n")))
-    vetor.append(input("%s" %("Digite seu CPF:(XXX.XXX.XXX-XX)\n")))
-    vetor.append(input("%s" %("Digite seu email:\n")))
+    while True:
+        cep = input("%s" %("Digite seu CEP:(XXXXX-XXX)\n"))
+        if len(cep) == 8:
+            cep = cep[:5]+"-"+cep[5:]
+            break
+        elif len(cep)==9 and cep[5]=="-":
+            break
+        else:
+            print("Digite um CEP valido!!!")
+    vetor.append(cep)
+    while True:
+        cpf = input("%s" %("Digite seu CPF:(XXX.XXX.XXX-XX)\n"))
+        if len(cpf) == 11:
+            cpf = cpf[:3]+"."+cpf[3:6]+"."+cpf[6:9]+"-"+cpf[9:]
+            break
+        elif len(cpf)==14 and cpf[3]=="." and cpf[7]=="." and cpf[11]=="-":
+            break
+        else:
+            print("Digite um CPF valido!!!")
+    vetor.append(cpf)
+    while True:
+        email = input("%s" %("Digite seu E-mail:\n"))
+        for elemento in email:
+            if elemento=="@":
+                verificado = 1
+                break
+            else:
+                verificado = 0
+        if verificado ==1:
+            break
+        else:
+            print("Digite um E-mail valido!!!")
+
+    vetor.append(email)
     while True:
         senha = input("%s" %("Digite sua senha:\n"))
         confirmarsenha = input("%s" %("Confirme sua senha:\n"))
@@ -263,6 +306,7 @@ def entrar():
             verificar = 1
         else:
             verificar = 0
+            numero_lista=-1
     lista =[verificar,numero_lista]
     #caso esteja tudo certo ira retornar que ele esta verificado e o numero dele na lista global dos usuarios
     return lista
@@ -345,7 +389,11 @@ def buscar_comida():
 
     #em seguida o numero da comida
     while True:
-        digitar = int(input("%s"%("Digite o numero da comida: ")))
+        while True:
+                digitar = input("%s"%("Digite o numero da comida: \n"))
+                if(digitar.isdigit()):
+                    digitar = int(digitar)
+                    break
         #ira verificar se existe e depois ira mostrar o numero da comida e o nome dela em seguida em baixo mostrara o preço 
         #no caso dos lanches mostrara o preço de cada sabor
         #por fim ira mostrar suas avaliação 
@@ -456,7 +504,7 @@ def buscar_comida():
             break
 
         elif escolher == 4 and digitar <= len(comidasL) and digitar>0:
-
+            #AQUI ENTRA AS CATEGORIAS LANCHES
             if digitar == 1:
                 print("Comida: %d | %-9s| "%(digitar,comidasL[digitar-1][0]))
                 
@@ -571,7 +619,7 @@ def buscar_comida():
 
                 for i in range(len(comidasL[3])-1):
                     print("Sabor: %-13s | "% comidasL[digitar-1][i+1])
-                    print("Preço: R$%-10.2f  |"% preco_LPas[i])
+                    print("Preço: R$%-10.2f  |"% preco_LHot[i])
  
                     estrela =""
                     estrela_vazia=0
@@ -605,7 +653,7 @@ def buscar_comida():
 
                 for i in range(len(comidasL[4])-1):
                     print("Sabor: %-13s | "% comidasL[digitar-1][i+1])
-                    print("Preço: R$%-10.2f  |"% preco_LPas[i])
+                    print("Preço: R$%-10.2f  |"% preco_LTapi[i])
  
                     estrela =""
                     estrela_vazia=0
@@ -639,7 +687,7 @@ def buscar_comida():
 
                 for i in range(len(comidasL[5])-1):
                     print("Sabor: %-13s | "% comidasL[digitar-1][i+1])
-                    print("Preço: R$%-10.2f  |"% preco_LPas[i])
+                    print("Preço: R$%-10.2f  |"% preco_LSand[i])
  
                     estrela =""
                     estrela_vazia=0
@@ -681,17 +729,17 @@ def pedido(num_login):
     totalpedido.append(func_pedir())
     while True:
         listar_comida()
-        digitar = int(input("\n%s\n%s\n%s\n%s\n%s\n%s\n"%("|-------------------------------------|","|Digite 1 para adicionar pedido       |","|Digite 2 para editar pedido          |","|Digite 3 para finalizar pedido       |","|Digite 4 para excluir pedido         |","|-------------------------------------|")))
-        if digitar ==1:
+        digitar = input("\n%s\n%s\n%s\n%s\n%s\n%s\n"%("|-------------------------------------|","|Digite 1 para adicionar pedido       |","|Digite 2 para editar pedido          |","|Digite 3 para finalizar pedido       |","|Digite 4 para excluir pedido         |","|-------------------------------------|"))
+        if digitar =="1":
             #chama a função para acrescentar na lista total do pedido do usuario
             totalpedido.append(func_pedir())
-        elif digitar ==2:
+        elif digitar =="2":
             #aqui a função recebe a lista total do pedido do usuario
             digito = editar(totalpedido)
             #aqui sera substituido pelo novo valor do usuario
             totalpedido[digito - 1] = func_pedir()
             
-        elif digitar ==3:
+        elif digitar =="3":
             #aqui sera gerado o o boleto para finalizar a compra
             boleto(totalpedido,num_login)
             print("%s"%("pagamento concluido"))
@@ -704,7 +752,7 @@ def pedido(num_login):
                 feedback(totalpedido)
             break
 
-        elif digitar == 4:
+        elif digitar == "4":
             #aqui se o usuario queira poderá ser exluido os pedidos
             exluir(totalpedido)
             x = input("%s"%("Precione 'Enter' para continuar"))
@@ -726,6 +774,7 @@ def func_pedir():
                 catec = 3
                 break
             elif digitar_catec =="lanches" or digitar_catec =="lanche":
+                sabores()
                 catec = 4
                 break
             else:
@@ -733,7 +782,12 @@ def func_pedir():
         while True:
             #depois ira escrever o numero do alimento
             sabor = ""
-            digitar_comida = int(input("%s"%("Digite o numero da comida: \n")))
+            while True:
+                digitar_comida = input("%s"%("Digite o numero da comida: \n"))
+                if(digitar_comida.isdigit()):
+                    digitar_comida = int(digitar_comida)
+                    break
+                
             if catec == 1 and digitar_comida>0 and digitar_comida<=len(comidasS):
                 break
             elif catec == 2 and digitar_comida>0 and digitar_comida<=len(comidasD):
@@ -759,7 +813,12 @@ def func_pedir():
                 print("%s"%("Alimento não encontrado!!!"))
 
         #aqui é a quantidade
-        quantidade = int(input("%s"%("Digite a quantidade:\n")))
+        while True:
+            quantidade = input("%s"%("Digite a quantidade:\n"))
+            if quantidade.isdigit():
+                quantidade = int(quantidade)
+                break
+        
         if catec ==1:
             pedir = [comidasS[digitar_comida-1],quantidade,sabor,catec, digitar_comida-1]
         elif catec ==2:
@@ -781,7 +840,13 @@ def editar(total):
             print(f"{i+1}º pedido: {total[i][0]} | quantidade: {total[i][1]} | sabor: {total[i][2]}\n")
     #aqui o usuario pode escolher qual pedido pode ser editado
     while True:
-        digito = int(input("%s"%("Digite o número do pedido que deseja editar: \n")))
+        while True:
+            digito = input("%s"%("Digite o número do pedido que deseja editar: \n"))
+            if digito.isdigit():
+                digito = int(digito)
+                break
+
+        
         if digito>0 and digito <= len(total):
             break
         else:
@@ -793,12 +858,12 @@ def editar(total):
 #aqui o usuario podera escolher em exluir o pedido    
 def exluir(total):
     #poderá excluir tudo ou apenas um pedido
-    digito = int(input("%s"%("\n|-------------------------------------|\n|Digite 1 para exluir todos os pedidos|\n|Digite 2 para exluir um pedido       |\n|Digite 3 para cancelar               |\n|-------------------------------------|\n")))
-    if digito ==1:
+    digito = input("%s"%("\n|-------------------------------------|\n|Digite 1 para exluir todos os pedidos|\n|Digite 2 para exluir um pedido       |\n|Digite 3 para cancelar               |\n|-------------------------------------|\n"))
+    if digito =="1":
         del total
         escolha_usuario2()
 
-    elif digito ==2:
+    elif digito =="2":
         print()
         for i in range(len(total)):
             if total[i][2] =="":
@@ -808,7 +873,13 @@ def exluir(total):
         
         while True:
             #aqui ele ira escolher qual pedido será exlcuido
-            digito = int(input("%s"%("Digite o número do pedido que deseja excluir: \n")))
+            while True:
+                digito = input("%s"%("Digite o número do pedido que deseja excluir: \n"))
+            
+                if digito.isdigit():
+                    digito = int(digito)
+                    break
+            
             if digito>0 and digito <= len(total):
                 break
             else:
@@ -858,15 +929,15 @@ def boleto(total,num_login):
                             precototal += (preco_LPas[n-1]*total[i][1]) 
                 elif total[i][4] == 3: 
                     for n in range(len(comidasL[3])):
-                        if total[i][2] == comidasL[2][n].lower():
+                        if total[i][2] == comidasL[3][n].lower():
                             precototal += (preco_LHot[n-1]*total[i][1]) 
                 elif total[i][4] == 4: 
                     for n in range(len(comidasL[4])):
-                        if total[i][2] == comidasL[2][n].lower():
+                        if total[i][2] == comidasL[4][n].lower():
                             precototal += (preco_LTapi[n-1]*total[i][1]) 
                 elif total[i][4] == 5: 
                     for n in range(len(comidasL[5])):
-                        if total[i][2] == comidasL[2][n].lower():
+                        if total[i][2] == comidasL[5][n].lower():
                             precototal += (preco_LSand[n-1]*total[i][1]) 
     #mostrara o preço total
     print("O preço total é de: R$ %.2f"% precototal) 
@@ -883,7 +954,11 @@ def feedback(total):
         print("--------------------------")
         while True:
             #o usuario pode avaliar o alimento entre 1 e 5
-            digito = float(input("%s"%("Digite entre 0 e 5 para esse alimento:\n")))
+            while True:
+                digito = input("%s"%("Digite entre 0 e 5 para esse alimento:\n"))
+                if digito.isdigit():
+                    digito = float(digito)
+                    break
             if digito >=0 and digito <=5:
                 break
         print()
@@ -925,7 +1000,32 @@ def feedback(total):
                     if total[i][2] == comidasL[5][n].lower():
                         avaliacao[3][5][n-1].append(digito)  
               
-              
+def sabores():
+
+    print()
+    for i in range(len(comidasL)):
+        for j in range(18):
+            print("_", end="")
+    print()
+    for i in range(len(comidasL)):
+        print("|%-18s"%comidasL[i][0], end="")
+    print()
+    for i in range(len(comidasL)):
+        for j in range(18):
+            print("_", end="")
+    print()
+    for k in range(sabores_total-2):
+        for i in range(len(comidasL)):
+            print("|%-18s"%comidasL[i][k+1][:18], end="")
+        print()
+    for m in range(len(comidasL)):
+            print("|%-18s"%comidasL[m][-1][:18], end="")
+    print()
+    for i in range(len(comidasL)):
+        for j in range(18):
+            print("_", end="")
+    print()
+
             
 
 #aqui chamara a função menu
