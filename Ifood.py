@@ -1,187 +1,100 @@
-
-#Variaveis globais para serem acessadas pelas funções
-#lista que iriar receber o metodo de entrada[email e senha]
-listaentrar = [["vini","123"]]
-#lista que contem todas as informações do usuario(os usuarios seram separados por listas(nome,cep,cpf,email e senha))
-listausuario = [["vinicius","12345-123","123.456.789-9", "vini", "123"]]
-#lista das comidas salgadas
-comidasS = ["Empada", "Kibe", "Esfiha", "Enroladinho", "Pão de queijo", "Pastel de carne", "Croquete", "Mini pizza", "Bolinha de queijo", "Risole", "Mini hot dog", "Mini hambúrguer"]
-#lista dos doces
-comidasD = ["Beijinho", "Pudim", "Quindim", "Torta de limão", "Bomba de chocolate", "Brownie", "Cupcake", "Churros", "Mousse de maracujá", "Sorvete", "Pavê", "Trufa"]
-#lista das carnes
-comidasC = ["Frango grelhado", "Carne de panela", "Costela", "Picanha", "Alcatra", "Filé mignon", "Coxa de frango", "Linguiça", "Carne moída", "Lombo", "Cupim", "Carne seca"]
-#lista dos lanches, os lanches sao separados pelo primeiro alimento e os demais sao os sabores do alimento
-comidasL = [["Pizza","Marguerita", "4 queijos", "Calabresa", "Napolitana", "Frango", "Brócolis com bacon", "Carne seca", "Bacon", "Milho com catupiry", "Vegetariana"], 
-            ["Hamburguer","X-FRANGO", "X-EGG", "X-TUDO DUPLO", "X-FISH", "X-SPECIAL", "X-FRANGO COM BACON", "X-CALABRESA", "X-SALAME", "X-CHEDDAR", "X-VEGANO"],
-            ["Pastel","Queijo", "Pizza", "Chocolate", "Palmito", "Brócolis", "Carne seca", "Milho", "Presunto", "Catupiry", "Banana com canela"],
-            ["Hot Dog", "Tradicional", "Duplo", "Bacon", "Frango com catupiry", "Calabresa","Americano", "Vegetariano", "Apimentado", "Catupiry", "Cheddar"],
-            ["Tapioca", "Frango", "Carne seca", "Queijo", "Presunto e queijo","Coco com leite condensado", "Banana com canela", "Chocolate", "Romeu e Julieta","Coco ralado"],
-            ["Sanduíche", "Natural", "Atum", "Frango", "Salame", "Queijo e presunto", "Vegano", "Peito de peru", "Ovo e queijo", "Bacon"]]
-#quantidade geral de categoria de comidas
+listaentrar,listausuario = [], []
+comidasS, comidasD, comidasC, comidasL = [], [], [], [] 
+preco_S, preco_D, preco_C, preco_LHot, preco_LTapi, preco_LSand, preco_LPiz, preco_LHam, preco_LPas = [], [], [], [], [], [], [], [], []
+avaliacao, listageral = [],[]
 comidastipo = 4
 sabores_total = 10
-#preço de cada salgado conforme a ordem da lista
-preco_S = [6, 8, 12.5 ,7, 6, 6, 6, 5, 8, 6, 9, 5]
-#preço de cada doce conforme a ordem da lista
-preco_D = [12, 8, 7, 6.5, 5, 6, 7, 8, 9, 10, 7, 8]
-#preço de cada carne conforme a ordem da lista
-preco_C = [30, 29,25, 28, 35, 45, 38, 50, 25, 22, 30, 33]
-#preço de cada sabor de pizza conforme a ordem da lista
-preco_LHot = [10, 12, 14, 15, 13, 16, 10, 12, 14, 15]
+diretoriocomidas = [["Dados/Comidas/salgados.txt",comidasS],["Dados/Comidas/doces.txt",comidasD],["Dados/Comidas/carnes.txt",comidasC]]
+diretoriolanche=["Dados/Comidas/lanchesPiz.txt","Dados/Comidas/lanchesHam.txt","Dados/Comidas/lanchesPas.txt","Dados/Comidas/lanchesHot.txt","Dados/Comidas/lanchesTap.txt","Dados/Comidas/lanchesSan.txt"]
+diretoriopreco = [["Dados/precos/preco_Sal.txt",preco_S], ["Dados/precos/preco_Doc.txt",preco_D], ["Dados/precos/preco_Car.txt",preco_C], ["Dados/precos/preco_Lhot.txt",preco_LHot], ["Dados/precos/preco_Ltap.txt",preco_LTapi], ["Dados/precos/preco_Lsan.txt",preco_LSand], ["Dados/precos/preco_Lpiz.txt",preco_LPiz], ["Dados/precos/preco_Lham.txt",preco_LHam], ["Dados/precos/preco_Lpas.txt",preco_LPas]]
+diretorioavaliacao = ["Dados/avaliacao/avaliacaoS.txt","Dados/avaliacao/avaliacaoD.txt","Dados/avaliacao/avaliacaoC.txt"]
+diretorioavaliacaolanche = ["Dados/avaliacao/avaliacaoLPiz.txt","Dados/avaliacao/avaliacaoLHam.txt","Dados/avaliacao/avaliacaoLPas.txt","Dados/avaliacao/avaliacaoLHot.txt","Dados/avaliacao/avaliacaoLTap.txt","Dados/avaliacao/avaliacaoLSan.txt"]
 
-preco_LTapi = [10, 12, 12, 11, 10, 12, 12, 11, 10, 10]
+#ORDEM DOS LANCHES PIZ/HAM/PAS/HOT/TAP/SAN
+arquivo = open("Dados/login.txt", "r")
+arquivo2 = arquivo.readlines()
+arquivo.close()
+if len(arquivo2)>1:
+    for contador in range(0,len(arquivo2),2):
+        usuario = [arquivo2[contador].strip(),arquivo2[contador+1].strip()]
+        listaentrar.append(usuario)
 
-preco_LSand = [9, 10, 11, 12, 11, 13, 9, 10, 11, 12]
-
-preco_LPiz = [30, 30, 32, 29, 28, 29, 29, 29, 28, 29]
-
-preco_LHam = [20, 22, 25, 18, 19, 30, 20, 22, 25, 18]
-
-preco_LPas = [12, 15, 12, 12, 10, 11, 12, 15, 12, 12]
+arquivo = open("Dados/usuario.txt", "r")
+arquivo2 = arquivo.readlines()
+arquivo.close()
 
 
-#lista de todas as avaliação,elas sao separas primeiro por categoria conforme a ordem das listas, segundo pelo numero do alimento conforme a ordem da lista, terceiro no caso dos lanches os sabores conforme a ordem da lista
-avaliacao_S = [
-    [3, 2],
-    [1, 2],
-    [2],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-]
+if len(arquivo2)>1:
+    for contador in range(0,len(arquivo2),5):
+        usuario = [arquivo2[contador].strip(),arquivo2[contador+1].strip(),arquivo2[contador+2].strip(),arquivo2[contador+3].strip(),arquivo2[contador+4].strip()]
+        listausuario.append(usuario)
 
-avaliacao_D = [
-    [5],
-    [3.5],
-    [2],
-    [2, 1],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3]
-]
+for contar in range (len(diretoriocomidas)):
+    arquivo = open(diretoriocomidas[contar][0], "r")
+    arquivo2 = arquivo.readlines()
+    arquivo.close()
 
-avaliacao_C = [
-    [1],
-    [2],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3]
-]
+    if len(arquivo2)>1:
+        for contador in range(len(arquivo2)):
+            valor_linha = arquivo2[contador].strip()
+            diretoriocomidas[contar][1].append(valor_linha)
 
-avaliacao_LPiz = [
-    [1.5, 4],
-    [2],
-    [2, 4],
-    [2],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3]
-]
 
-avaliacao_LHam = [
-    [2],
-    [1],
-    [5],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3]
-]
 
-avaliacao_LPas = [
-    [2],
-    [1],
-    [3],
-    [2],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3]
-]
+for j in range (len(diretoriolanche)):
+    arquivo = open(diretoriolanche[j], "r")
+    arquivo2 = arquivo.readlines()
+    arquivo.close()
 
-avaliacao_LHot = [
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3]
-]
+    if len(arquivo2)>1:
+        valor_linha = []
+        for contador in range(len(arquivo2)):
+            valor_linha.append(arquivo2[contador].strip())
+        comidasL.append(valor_linha)
 
-avaliacao_LTapi = [
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3]
-]
 
-avaliacao_LSand = [
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3],
-    [3]
-]
-avaliacao=[avaliacao_S,avaliacao_D,avaliacao_C,[avaliacao_LPiz,avaliacao_LHam,avaliacao_LPas,avaliacao_LHot,avaliacao_LTapi,avaliacao_LSand]]
-#função menu onde sera a primeira a iniciar
+for contar in range (len(diretoriopreco)):
+    arquivo = open(diretoriopreco[contar][0], "r")
+    arquivo2 = arquivo.readlines()
+    arquivo.close()
+
+    if len(arquivo2)>1:
+        for contador in range(len(arquivo2)):
+            valor_linha = float(arquivo2[contador].strip())
+            diretoriopreco[contar][1].append(valor_linha)
+
+
+
+for contar in range (len(diretorioavaliacao)):
+    arquivo = open(diretorioavaliacao[contar], "r")
+    arquivo2 = arquivo.readlines()
+    arquivo.close()
+
+    if len(arquivo2)>1:
+        lista_provisoria = []
+        for contador in range(len(arquivo2)):
+            valor_linha_tirando_barra = arquivo2[contador].strip()
+            valor_linha = [float(linhadotexto) for linhadotexto in valor_linha_tirando_barra.split(",")]
+            lista_provisoria.append(valor_linha)
+           
+        avaliacao.append(lista_provisoria)
+
+for contar in range (len(diretorioavaliacaolanche)):
+    arquivo = open(diretorioavaliacaolanche[contar], "r")
+    arquivo2 = arquivo.readlines()
+    arquivo.close()
+    if len(arquivo2)>1:
+        listaespecifica = []
+        for contador in range(len(arquivo2)):
+            valor_linha_tirando_barra = arquivo2[contador].strip()
+            valor_linha = [float(linhadotexto) for linhadotexto in valor_linha_tirando_barra.split(",")]
+            listaespecifica.append(valor_linha)
+        listageral.append(listaespecifica)
+    
+else:
+   
+    avaliacao.append(listageral)  
+
 def menu():
     #chama a função logo para gerar um desenho
     logo()
@@ -209,9 +122,9 @@ def escolha_usuario1():
         if digito == "2":
             #caso o usuario escolha cadastrar sera chamada a função cadastrar que ira receber os dados do cadastro e ira salvar na variavel global dos usuarios e tambem ficara salvo o email e senha dele na lista de entrada   
             usuario = cadastrar()
-            listausuario.append(usuario)
             usuarioemail = [usuario[3],usuario[4]]
-            listaentrar.append(usuarioemail)
+            atualizar(usuarioemail,"Dados/login.txt","login")
+            atualizar(usuario,"Dados/usuario.txt","usuario")
             x = input("%s"%("Precione 'Enter' para continuar..."))
            
         elif digito=="1":
@@ -304,13 +217,13 @@ def entrar():
         if email == listaentrar[i][0] and senha == listaentrar[i][1]:
             numero_lista = i
             verificar = 1
-        else:
-            verificar = 0
-            numero_lista=-1
+            break
+    else:
+        verificar = 0
+        numero_lista=-1
     lista =[verificar,numero_lista]
     #caso esteja tudo certo ira retornar que ele esta verificado e o numero dele na lista global dos usuarios
     return lista
-
 #aqui é a função que lista todas as comidas
 def listar_comida():
     #contar ele que vai gerar o numero dos alimentos
@@ -999,6 +912,16 @@ def feedback(total):
                 for n in range(len(comidasL[5])):
                     if total[i][2] == comidasL[5][n].lower():
                         avaliacao[3][5][n-1].append(digito)  
+    else:
+        atualizar(avaliacao[0],"Dados/avaliacao/avaliacaoS.txt")
+        atualizar(avaliacao[1],"Dados/avaliacao/avaliacaoD.txt")
+        atualizar(avaliacao[2],"Dados/avaliacao/avaliacaoC.txt")
+        atualizar(avaliacao[3][0],"Dados/avaliacao/avaliacaoLPiz.txt")
+        atualizar(avaliacao[3][1],"Dados/avaliacao/avaliacaoLHam.txt")
+        atualizar(avaliacao[3][2],"Dados/avaliacao/avaliacaoLPas.txt")
+        atualizar(avaliacao[3][3],"Dados/avaliacao/avaliacaoLHot.txt")
+        atualizar(avaliacao[3][4],"Dados/avaliacao/avaliacaoLTap.txt")
+        atualizar(avaliacao[3][5],"Dados/avaliacao/avaliacaoLSan.txt")
               
 def sabores():
 
@@ -1026,7 +949,37 @@ def sabores():
             print("_", end="")
     print()
 
-            
+def atualizar(valor,texto_arquivo,chave = ""):
+    arquivo = open(texto_arquivo, "r")
+    arquivo2 = arquivo.readlines()
+    arquivo.close()
+
+    arquivo = open(texto_arquivo, "w")
+    for linha in (arquivo2):
+        arquivo.write(f"{linha}")
+    for linha in (valor):
+        arquivo.write(f"{linha}\n")    
+    arquivo.close()
+
+    atualizarvariaveis(texto_arquivo, chave)  
+
+def atualizarvariaveis(texto,variavel):
+    arquivo = open(texto, "r")
+    arquivo2 = arquivo.readlines()
+    arquivo.close()
+    if variavel == "login":
+        global listaentrar
+        listaentrar = [] 
+        for contador in range(0,len(arquivo2),2):
+            usuario = [arquivo2[contador][:-1],arquivo2[contador+1][:-1]]
+            listaentrar.append(usuario)
+    elif variavel == "usuario":
+        global listausuario
+        listausuario = [] 
+        for contador in range(0,len(arquivo2),5):
+            usuario = [arquivo2[contador][:-1],arquivo2[contador+1][:-1],arquivo2[contador+2][:-1],arquivo2[contador+3][:-1],arquivo2[contador+4][:-1]]
+            listausuario.append(usuario)
+    
 
 #aqui chamara a função menu
 menu()
