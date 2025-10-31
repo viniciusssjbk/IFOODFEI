@@ -65,35 +65,38 @@ for contar in range (len(diretoriopreco)):
 
 
 
-for contar in range (len(diretorioavaliacao)):
+for contar in range(len(diretorioavaliacao)):
     arquivo = open(diretorioavaliacao[contar], "r")
     arquivo2 = arquivo.readlines()
     arquivo.close()
 
-    if len(arquivo2)>1:
+    if len(arquivo2) > 1:
         lista_provisoria = []
         for contador in range(len(arquivo2)):
             valor_linha_tirando_barra = arquivo2[contador].strip()
+            if valor_linha_tirando_barra == "":  # ignora linha vazia
+                continue
             valor_linha = [float(linhadotexto) for linhadotexto in valor_linha_tirando_barra.split(",")]
             lista_provisoria.append(valor_linha)
            
         avaliacao.append(lista_provisoria)
 
-for contar in range (len(diretorioavaliacaolanche)):
+for contar in range(len(diretorioavaliacaolanche)):
     arquivo = open(diretorioavaliacaolanche[contar], "r")
     arquivo2 = arquivo.readlines()
     arquivo.close()
-    if len(arquivo2)>1:
+    if len(arquivo2) > 1:
         listaespecifica = []
         for contador in range(len(arquivo2)):
             valor_linha_tirando_barra = arquivo2[contador].strip()
+            if valor_linha_tirando_barra == "":  # ignora linha vazia
+                continue
             valor_linha = [float(linhadotexto) for linhadotexto in valor_linha_tirando_barra.split(",")]
             listaespecifica.append(valor_linha)
         listageral.append(listaespecifica)
     
 else:
-   
-    avaliacao.append(listageral)  
+    avaliacao.append(listageral)
 
 def menu():
     #chama a função logo para gerar um desenho
@@ -872,7 +875,7 @@ def feedback(total):
                 if digito.isdigit():
                     digito = float(digito)
                     break
-            if digito >=0 and digito <=5:
+            if 0.0 <= digito <= 5.0:
                 break
         print()
         #aqui verifica onde o alimento pertence para ele ficar salvo na lista avaliação
@@ -913,16 +916,7 @@ def feedback(total):
                     if total[i][2] == comidasL[5][n].lower():
                         avaliacao[3][5][n-1].append(digito)  
     else:
-        atualizar(avaliacao[0],"Dados/avaliacao/avaliacaoS.txt")
-        atualizar(avaliacao[1],"Dados/avaliacao/avaliacaoD.txt")
-        atualizar(avaliacao[2],"Dados/avaliacao/avaliacaoC.txt")
-        atualizar(avaliacao[3][0],"Dados/avaliacao/avaliacaoLPiz.txt")
-        atualizar(avaliacao[3][1],"Dados/avaliacao/avaliacaoLHam.txt")
-        atualizar(avaliacao[3][2],"Dados/avaliacao/avaliacaoLPas.txt")
-        atualizar(avaliacao[3][3],"Dados/avaliacao/avaliacaoLHot.txt")
-        atualizar(avaliacao[3][4],"Dados/avaliacao/avaliacaoLTap.txt")
-        atualizar(avaliacao[3][5],"Dados/avaliacao/avaliacaoLSan.txt")
-              
+        substituir(avaliacao)
 def sabores():
 
     print()
@@ -950,13 +944,14 @@ def sabores():
     print()
 
 def atualizar(valor,texto_arquivo,chave = ""):
+
     arquivo = open(texto_arquivo, "r")
     arquivo2 = arquivo.readlines()
     arquivo.close()
-
     arquivo = open(texto_arquivo, "w")
     for linha in (arquivo2):
-        arquivo.write(f"{linha}")
+            arquivo.write(f"{linha}")
+
     for linha in (valor):
         arquivo.write(f"{linha}\n")    
     arquivo.close()
@@ -980,6 +975,21 @@ def atualizarvariaveis(texto,variavel):
             usuario = [arquivo2[contador][:-1],arquivo2[contador+1][:-1],arquivo2[contador+2][:-1],arquivo2[contador+3][:-1],arquivo2[contador+4][:-1]]
             listausuario.append(usuario)
     
+def substituir(valor):
+    for i in range(0, 3):
+        arquivo = open(diretorioavaliacao[i], "w")
+        for linha in (valor[i]):
+            if len(linha) > 0:  # evita escrever linhas vazias
+                arquivo.write(",".join(map(str, linha)) + "\n")
+        arquivo.close()
 
+    for j in range(0, 5):
+        arquivo = open(diretorioavaliacaolanche[j], "w")
+        for linha in (valor[3][j]):
+            if len(linha) > 0:
+                arquivo.write(",".join(map(str, linha)) + "\n")
+        arquivo.close()
+
+    
 #aqui chamara a função menu
 menu()
