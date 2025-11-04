@@ -303,7 +303,7 @@ def listar_comida():
 def buscar_comida():
     #primeiro o usuario ira digitar a categoria
     while True:
-        tipo = input("%s"%("Digite a categoria da comida:(1 ou salgados,2 ou doces,3 ou carnes,4 oulaches)\n"))
+        tipo = input("%s"%("Digite a categoria da comida:(1 ou salgados,2 ou doces,3 ou carnes,4 ou laches)\n"))
         tipo_m = tipo.lower()
         #verificação se o que o usuario digitou é valido
         if tipo_m == "salgados" or tipo_m == "salgado" or tipo_m =="1":
@@ -753,10 +753,14 @@ def func_pedir():
                 quantidade = int(quantidade)
                 break
         
+        if catec ==1:
+            pedir = [comidasS[digitar_comida-1],quantidade,sabor,catec, digitar_comida-1]
+        elif catec ==2:
+            pedir = [comidasD[digitar_comida-1],quantidade,sabor,catec, digitar_comida-1]
+        if catec ==3:
+            pedir = [comidasC[digitar_comida-1],quantidade,sabor,catec, digitar_comida-1]
         if catec ==4:
             pedir = [comidasL[digitar_comida-1][0],quantidade,sabor,catec, digitar_comida-1]
-        else:
-            pedir = [comidasS[digitar_comida-1],quantidade,sabor,catec, digitar_comida-1]
         #aqui ira retornar como forma de lista tudo que o usuario pediu será enviado na ordem: (nome da comida)/(quantidade)/(sabor)/(numero da categoria) e (numero da comida)
         return pedir
 #aqui é a função onde o usuario podera editar o seu pedido   

@@ -1,10 +1,5 @@
 vinicius
 12345-123
-123.123.123-12
-viniciud@gmail.com
+123.456.789-99
+vinicius@gmail.com
 123
-paulo
-12345-123
-888.777.666-55
-paulo@gmail.com
-222
