@@ -1,16 +1,31 @@
+#IFOOD FEI
+#Autor: Vinicius Santos de Oliveira
+#Curso: Ciência da computação - vespertino
+#github: github.com/viniciusssjbk
+
+#--------------VARIAVEIS GLOBAIS------------
+
+#lista dos usuarios e lista de entrada
 listaentrar,listausuario = [], []
-comidasS, comidasD, comidasC, comidasL = [], [], [], [] 
+#lista dos alimentos: Salgados, Doces, Carnes e Lanches
+comidasS, comidasD, comidasC, comidasL = [], [], [], []
+#lista dos preços de cada alimento 
 preco_S, preco_D, preco_C, preco_LHot, preco_LTapi, preco_LSand, preco_LPiz, preco_LHam, preco_LPas = [], [], [], [], [], [], [], [], []
-avaliacao, listageral = [],[]
+#lista de todas as avaliações e lista geral auxiliar da avaliação
+avaliacao, listageral_aux = [],[]
+#quantidade total de categorias
 comidastipo = 4
+#quantidade total de sabores dos lanches
 sabores_total = 10
+#diretorio das comidas: Salgado, Doces,Carnes e dos lanches e seus sabores
+#diretorio dos preços de cada alimento e das avaliação deles
 diretoriocomidas = [["Dados/Comidas/salgados.txt",comidasS],["Dados/Comidas/doces.txt",comidasD],["Dados/Comidas/carnes.txt",comidasC]]
 diretoriolanche=["Dados/Comidas/lanchesPiz.txt","Dados/Comidas/lanchesHam.txt","Dados/Comidas/lanchesPas.txt","Dados/Comidas/lanchesHot.txt","Dados/Comidas/lanchesTap.txt","Dados/Comidas/lanchesSan.txt"]
 diretoriopreco = [["Dados/precos/preco_Sal.txt",preco_S], ["Dados/precos/preco_Doc.txt",preco_D], ["Dados/precos/preco_Car.txt",preco_C], ["Dados/precos/preco_Lhot.txt",preco_LHot], ["Dados/precos/preco_Ltap.txt",preco_LTapi], ["Dados/precos/preco_Lsan.txt",preco_LSand], ["Dados/precos/preco_Lpiz.txt",preco_LPiz], ["Dados/precos/preco_Lham.txt",preco_LHam], ["Dados/precos/preco_Lpas.txt",preco_LPas]]
 diretorioavaliacao = ["Dados/avaliacao/avaliacaoS.txt","Dados/avaliacao/avaliacaoD.txt","Dados/avaliacao/avaliacaoC.txt"]
 diretorioavaliacaolanche = ["Dados/avaliacao/avaliacaoLPiz.txt","Dados/avaliacao/avaliacaoLHam.txt","Dados/avaliacao/avaliacaoLPas.txt","Dados/avaliacao/avaliacaoLHot.txt","Dados/avaliacao/avaliacaoLTap.txt","Dados/avaliacao/avaliacaoLSan.txt"]
 
-#ORDEM DOS LANCHES PIZ/HAM/PAS/HOT/TAP/SAN
+#Colocando os valores salvos do login para a lista de entrada
 arquivo = open("Dados/login.txt", "r")
 arquivo2 = arquivo.readlines()
 arquivo.close()
@@ -19,16 +34,16 @@ if len(arquivo2)>1:
         usuario = [arquivo2[contador].strip(),arquivo2[contador+1].strip()]
         listaentrar.append(usuario)
 
+#Colocando os valores salvos do cadastro para a lista de usuarios
 arquivo = open("Dados/usuario.txt", "r")
 arquivo2 = arquivo.readlines()
 arquivo.close()
-
-
 if len(arquivo2)>1:
     for contador in range(0,len(arquivo2),5):
         usuario = [arquivo2[contador].strip(),arquivo2[contador+1].strip(),arquivo2[contador+2].strip(),arquivo2[contador+3].strip(),arquivo2[contador+4].strip()]
         listausuario.append(usuario)
 
+#Colocando as comidas e lanches
 for contar in range (len(diretoriocomidas)):
     arquivo = open(diretoriocomidas[contar][0], "r")
     arquivo2 = arquivo.readlines()
@@ -38,9 +53,7 @@ for contar in range (len(diretoriocomidas)):
         for contador in range(len(arquivo2)):
             valor_linha = arquivo2[contador].strip()
             diretoriocomidas[contar][1].append(valor_linha)
-
-
-
+            
 for j in range (len(diretoriolanche)):
     arquivo = open(diretoriolanche[j], "r")
     arquivo2 = arquivo.readlines()
@@ -52,7 +65,7 @@ for j in range (len(diretoriolanche)):
             valor_linha.append(arquivo2[contador].strip())
         comidasL.append(valor_linha)
 
-
+#Colocando os preços de cada alimento
 for contar in range (len(diretoriopreco)):
     arquivo = open(diretoriopreco[contar][0], "r")
     arquivo2 = arquivo.readlines()
@@ -63,8 +76,7 @@ for contar in range (len(diretoriopreco)):
             valor_linha = float(arquivo2[contador].strip())
             diretoriopreco[contar][1].append(valor_linha)
 
-
-
+#Colocando as avaliações dos alimentos
 for contar in range(len(diretorioavaliacao)):
     arquivo = open(diretorioavaliacao[contar], "r")
     arquivo2 = arquivo.readlines()
@@ -93,11 +105,12 @@ for contar in range(len(diretorioavaliacaolanche)):
                 continue
             valor_linha = [float(linhadotexto) for linhadotexto in valor_linha_tirando_barra.split(",")]
             listaespecifica.append(valor_linha)
-        listageral.append(listaespecifica)
+        listageral_aux.append(listaespecifica)
     
 else:
-    avaliacao.append(listageral)
+    avaliacao.append(listageral_aux)
 
+#função menu
 def menu():
     #chama a função logo para gerar um desenho
     logo()
@@ -146,10 +159,11 @@ def escolha_usuario2(num_entrar):
     while True:
         digito = input("\n%s\n%s\n%s\n%s\n" % ("|--------------------------------------|","|Digite 1 para ver todas as comidas    |\n|Digite 2 para buscar e mostrar valores|\n|Digite 3 para cadastrar o seu pedido  |","|Digite 4 para sair do programa        |","|--------------------------------------|"))
         if digito == "1":
-            #Aqui chamara uma função que ira listar todas as comidas
+            #Aqui chamara uma função que ira listar todas as comidas e sabores
             listar_comida()
             x = input("%s"%("Precione 'Enter' para continuar..."))
             sabores()
+            x = input("%s"%("Precione 'Enter' para continuar..."))
         elif digito == "2":
             #Aqui chamara a função que buscará uma comida especifica
             buscar_comida()
@@ -159,7 +173,7 @@ def escolha_usuario2(num_entrar):
             pedido(num_entrar)
             x = input("%s"%("Precione 'Enter' para continuar..."))
         elif digito == "4":
-            #aqui o num_entrar esta passando o numero do usuario dele na lista de usuario global para que ele seja utilizado depois
+            #aqui o usuario sai do programa
             x = input("%s"%("Saindo do programa....."))
             break 
         else:
@@ -170,6 +184,7 @@ def cadastrar():
     vetor.append(input("%s" %("Digite seu nome:\n")))
     while True:
         cep = input("%s" %("Digite seu CEP:(XXXXX-XXX)\n"))
+        #verificação se o CEP é valido
         if len(cep) == 8:
             cep = cep[:5]+"-"+cep[5:]
             break
@@ -180,6 +195,7 @@ def cadastrar():
     vetor.append(cep)
     while True:
         cpf = input("%s" %("Digite seu CPF:(XXX.XXX.XXX-XX)\n"))
+        #verificação se o CPF é valido
         if len(cpf) == 11:
             cpf = cpf[:3]+"."+cpf[3:6]+"."+cpf[6:9]+"-"+cpf[9:]
             break
@@ -189,6 +205,7 @@ def cadastrar():
             print("Digite um CPF valido!!!")
     vetor.append(cpf)
     while True:
+        #verificação se o E-mail é valido
         email = input("%s" %("Digite seu E-mail:\n"))
         for elemento in email:
             if elemento=="@":
@@ -203,6 +220,7 @@ def cadastrar():
 
     vetor.append(email)
     while True:
+        #verificação da senha e confirmar senha é valido
         senha = input("%s" %("Digite sua senha:\n"))
         confirmarsenha = input("%s" %("Confirme sua senha:\n"))
         if senha == confirmarsenha:
@@ -285,18 +303,19 @@ def listar_comida():
 def buscar_comida():
     #primeiro o usuario ira digitar a categoria
     while True:
-        tipo = input("%s"%("Digite a categoria da comida:(salgados,doces,carnes,laches)\n"))
+        tipo = input("%s"%("Digite a categoria da comida:(1 ou salgados,2 ou doces,3 ou carnes,4 oulaches)\n"))
         tipo_m = tipo.lower()
-        if tipo_m == "salgados" or tipo_m == "salgado":
+        #verificação se o que o usuario digitou é valido
+        if tipo_m == "salgados" or tipo_m == "salgado" or tipo_m =="1":
             escolher = 1
             break
-        elif tipo_m == "doces" or tipo_m == "doce":
+        elif tipo_m == "doces" or tipo_m == "doce" or tipo_m =="2":
             escolher = 2
             break
-        elif tipo_m == "carnes" or tipo_m == "carne":
+        elif tipo_m == "carnes" or tipo_m == "carne" or tipo_m =="3":
             escolher = 3
             break
-        elif tipo_m == "lanches" or tipo_m == "lanche":
+        elif tipo_m == "lanches" or tipo_m == "lanche" or tipo_m =="4":
             escolher = 4
             break
         else:
@@ -311,13 +330,12 @@ def buscar_comida():
                     digitar = int(digitar)
                     break
         #ira verificar se existe e depois ira mostrar o numero da comida e o nome dela em seguida em baixo mostrara o preço 
-        #no caso dos lanches mostrara o preço de cada sabor
-        #por fim ira mostrar suas avaliação 
+        #se for Salgado
         if escolher == 1 and digitar <= len(comidasS) and digitar>0:
 
             print("Comida: %d | %-9s| "% (digitar,comidasS[digitar-1]))
             print("Preço: R$%-10.2f  |"% preco_S[digitar-1])
-
+            #por fim ira mostrar suas avaliação 
             estrela =""
             estrela_vazia = 0
 
@@ -349,7 +367,7 @@ def buscar_comida():
 
             break
 
-
+        #se for Doces
         elif escolher == 2 and digitar <= len(comidasD) and digitar>0:
 
             print("Comida: %d | %-9s| "% (digitar,comidasD[digitar-1]))
@@ -382,7 +400,7 @@ def buscar_comida():
                 estrela = ""
                 estrela_vazia=0
             break
-
+        #se for Carne
         elif escolher == 3 and digitar <= len(comidasC) and digitar>0:
 
             print("Comida: %d | %-9s| "% (digitar,comidasC[digitar-1]))
@@ -418,9 +436,9 @@ def buscar_comida():
                 estrela_vazia=0
 
             break
-
+        #se for Lanches
         elif escolher == 4 and digitar <= len(comidasL) and digitar>0:
-            #AQUI ENTRA AS CATEGORIAS LANCHES
+            #aqui ira mostrar cada sabor do lanche digitado
             if digitar == 1:
                 print("Comida: %d | %-9s| "%(digitar,comidasL[digitar-1][0]))
                 
@@ -703,7 +721,7 @@ def func_pedir():
                 if(digitar_comida.isdigit()):
                     digitar_comida = int(digitar_comida)
                     break
-                
+            #verifica se se o numero da comida é valido     
             if catec == 1 and digitar_comida>0 and digitar_comida<=len(comidasS):
                 break
             elif catec == 2 and digitar_comida>0 and digitar_comida<=len(comidasD):
@@ -735,14 +753,10 @@ def func_pedir():
                 quantidade = int(quantidade)
                 break
         
-        if catec ==1:
-            pedir = [comidasS[digitar_comida-1],quantidade,sabor,catec, digitar_comida-1]
-        elif catec ==2:
-            pedir = [comidasD[digitar_comida-1],quantidade,sabor,catec, digitar_comida-1]
-        if catec ==3:
-            pedir = [comidasC[digitar_comida-1],quantidade,sabor,catec, digitar_comida-1]
         if catec ==4:
             pedir = [comidasL[digitar_comida-1][0],quantidade,sabor,catec, digitar_comida-1]
+        else:
+            pedir = [comidasS[digitar_comida-1],quantidade,sabor,catec, digitar_comida-1]
         #aqui ira retornar como forma de lista tudo que o usuario pediu será enviado na ordem: (nome da comida)/(quantidade)/(sabor)/(numero da categoria) e (numero da comida)
         return pedir
 #aqui é a função onde o usuario podera editar o seu pedido   
@@ -917,13 +931,18 @@ def feedback(total):
                         avaliacao[3][5][n-1].append(digito)  
     else:
         substituir(avaliacao)
+#aqui mostra todo os sabores
 def sabores():
 
     print()
+    print("-------------------SABORES------------------------")
     for i in range(len(comidasL)):
+        #criar uma linha 18 vezes de tamanho
         for j in range(18):
             print("_", end="")
     print()
+    #aqui esta percorrendo a variação alimentos primeiro pelo topo depois vai decendo
+    #1ºsabor,1ºsabor
     for i in range(len(comidasL)):
         print("|%-18s"%comidasL[i][0], end="")
     print()
@@ -931,10 +950,14 @@ def sabores():
         for j in range(18):
             print("_", end="")
     print()
+    #aqui vai mostrando os demais deveram preencher 18 de tamanho
+    #2ºsabor,2ºsabor
+    #3ºsabor,3ºsabor
     for k in range(sabores_total-2):
         for i in range(len(comidasL)):
             print("|%-18s"%comidasL[i][k+1][:18], end="")
         print()
+    #aqui percorre os ultimos valores e esses valores deveram preencher 18 de tamanho
     for m in range(len(comidasL)):
             print("|%-18s"%comidasL[m][-1][:18], end="")
     print()
@@ -942,9 +965,9 @@ def sabores():
         for j in range(18):
             print("_", end="")
     print()
-
+#aqui atualiza o arquivo txt especifico
 def atualizar(valor,texto_arquivo,chave = ""):
-
+    #aqui pega o texto e atualiza o arquivo txt
     arquivo = open(texto_arquivo, "r")
     arquivo2 = arquivo.readlines()
     arquivo.close()
@@ -958,7 +981,9 @@ def atualizar(valor,texto_arquivo,chave = ""):
 
     atualizarvariaveis(texto_arquivo, chave)  
 
+#aqui atualiza as variaveis globais
 def atualizarvariaveis(texto,variavel):
+   
     arquivo = open(texto, "r")
     arquivo2 = arquivo.readlines()
     arquivo.close()
@@ -975,21 +1000,45 @@ def atualizarvariaveis(texto,variavel):
             usuario = [arquivo2[contador][:-1],arquivo2[contador+1][:-1],arquivo2[contador+2][:-1],arquivo2[contador+3][:-1],arquivo2[contador+4][:-1]]
             listausuario.append(usuario)
     
+
+
+#aqui atualiza o txt das avaliações
 def substituir(valor):
+    #aqui sao as comidas
     for i in range(0, 3):
         arquivo = open(diretorioavaliacao[i], "w")
+        #o 'valor' é os mesmos valores da variavel global avaliação que foi alterada pelo usuario depois dele ter avaliado
         for linha in (valor[i]):
-            if len(linha) > 0:  # evita escrever linhas vazias
-                arquivo.write(",".join(map(str, linha)) + "\n")
-        arquivo.close()
+            #aqui verifica se a linha possui 2 ou mais avaliação
+            if len(linha)>=2:
+                for k in range (len(linha)):
+                    #verifica se chegou na ultima avalição da linha
+                    if k ==(len(linha)-1):
+                        #coloca a ultima e quebra a linha
+                        arquivo.write(f"{linha[k]}\n")
+                    else:
+                        #coloca a linha e poe uma virgula
+                        arquivo.write(f"{linha[k]},")
 
+            else:
+                #caso so tenha 1 avaliação ou nenhuma ele so coloca o primeiro valor e quebra a linha
+                arquivo.write(f"{linha[0]}\n")
+        arquivo.close()
+    #aqui sao os lanches
     for j in range(0, 5):
         arquivo = open(diretorioavaliacaolanche[j], "w")
         for linha in (valor[3][j]):
-            if len(linha) > 0:
-                arquivo.write(",".join(map(str, linha)) + "\n")
-        arquivo.close()
+            if len(linha)>=2:
+                for k in range (len(linha)):
+                    if k ==(len(linha)-1):
+                        arquivo.write(f"{linha[k]}\n")
+                    else:
+                        arquivo.write(f"{linha[k]},")
 
+            else:
+                arquivo.write(f"{linha[0]}\n")
+        arquivo.close()
+           
     
-#aqui chamara a função menu
+#aqui chama a função menu
 menu()
